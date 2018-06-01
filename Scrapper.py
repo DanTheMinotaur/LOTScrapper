@@ -6,6 +6,8 @@ from string import Template
 games = [
     'euromillions',
     'lotto',
+    'daily-million',
+    'lotto54321',
 ]
 
 
