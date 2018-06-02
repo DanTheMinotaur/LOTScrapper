@@ -21,10 +21,10 @@ class CollectAll:
         for game in self.games:
             self.urls[game] = Template('https://www.lottery.ie/dbg/results/view?game=$game&draws=0').substitute(dict(game=game))
 
-    def print_urls(self):
-        print(self.urls)
+    def get_games(self):
+        return self.games
 
-    def add_game(self, game):
+    def set_game(self, game):
         self.games.append(game)
 
     def download_pages(self):
