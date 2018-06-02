@@ -12,4 +12,4 @@ from collector.Interpreter import Interpreter
 #collect.file_writer('Hello', 'hello.html')
 
 inter = Interpreter()
-inter.read_page('download/2018.06.01/lotto.html')
+inter.read_page('download/2018.06.01/lotto.html', 'lotto')
