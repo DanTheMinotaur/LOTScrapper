@@ -3,6 +3,7 @@ import urllib.request
 import datetime
 import os
 
+
 class CollectAll:
 
     games = [

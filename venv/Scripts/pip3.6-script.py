@@ -1,4 +1,4 @@
-#!C:\Users\ddevine\PycharmProjects\LOTScrapper\venv\Scripts\python.exe
+#!D:\Development\Python\LOTScrapper\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==9.0.1','console_scripts','pip3.6'
 __requires__ = 'pip==9.0.1'
 import re
