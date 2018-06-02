@@ -12,4 +12,16 @@ from collector.Interpreter import Interpreter
 #collect.file_writer('Hello', 'hello.html')
 
 inter = Interpreter()
-inter.read_page('download/2018.06.01/lotto.html', 'lotto')
+#inter.read_page('download/2018.06.01/lotto.html', 'lotto')
+
+games = {
+    'euromillions': 'download/2018.06.01/euromillions.html',
+    'lotto': 'download/2018.06.01/lotto.html',
+    'daily-million': 'download/2018.06.01/daily-million.html',
+    'lotto54321': 'download/2018.06.01/lotto54321.html',
+}
+
+inter.read_pages(games)
+
+
+inter.print_results()

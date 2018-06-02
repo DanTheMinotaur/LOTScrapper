@@ -2,9 +2,11 @@ from bs4 import BeautifulSoup
 
 class Interpreter:
 
-    test = 'download/2018.06.01/lotto.html'
-
     results_data = dict()
+
+    def read_pages(self, pages):
+        for game, page in pages.items():
+            self.read_page(page, game)
 
     def read_page(self, page, game_name):
         html = BeautifulSoup(open(page).read(), 'html.parser')
@@ -38,6 +40,6 @@ class Interpreter:
 
             self.results_data[game_name].append(data)
 
+    def print_results(self):
         print(self.results_data)
-
 
