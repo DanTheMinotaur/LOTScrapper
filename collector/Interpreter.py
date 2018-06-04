@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 
+
 class Interpreter:
 
     results_data = dict()
