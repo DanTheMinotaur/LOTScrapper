@@ -1,13 +1,12 @@
 from collector.CollectAll import CollectAll
-from collector.Interpreter import Interpreter
+from collector.Interpreter import Interpreter, Database
 
 
 collect = CollectAll()
-
-collect.generate_urls()
+#collect.generate_urls()
 #collect.download_page('https://www.lottery.ie/dbg/results/view?game=lotto&draws=0', 'test')
 
-collect.download_pages()
+#collect.download_pages()
 
 #collect.file_writer('Hello', 'hello.html')
 
@@ -25,3 +24,9 @@ inter.read_pages(games)
 
 
 inter.print_results()
+
+inter.extract_full_info()
+
+#db = Database()
+
+#db.insert_result(['euromillions', '2018-06-01', '17', '18', '24', '29', '40', '4', '5'])
