@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime, date
+from collector.Database import Database
 
 class Parser:
 
@@ -11,13 +12,38 @@ class Parser:
             'lotto54321'
         ]
         self.game_results = dict()
+        self.db = Database()
+
+    def add_lotto(self):
+        data_to_insert = []
+        for game in self.game_results['lotto']:
+            for i, result in enumerate(game['results']):
+                game_data = []
+                if i == 0:
+                    game_type = "Lotto"
+                if i == 1:
+                    game_type = "Lotto Plus 1"
+                if i == 2:
+                    game_type = "Lotto Plus 2"
+                game_data.append(game_type)
+                game_data.append(game['date'])
+                game_data = game_data + result
+
+                data_to_insert.append(tuple(game_data))
+
+        print("Inserting Lotto Results to DB")
+        self.db.alter_data(
+            "INSERT INTO lottery.lotto(game_type, game_date, number_1, number_2, number_3, number_4, number_5, number_6, bonus_number)"
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", data_to_insert
+        )
+
 
     """
         Method generates all data by date and sets game_results with each results.
     """
-    def read_games(self, date):
+    def read_games(self, game_date):
         for game in self.games:
-            self.game_results[game] = self.read_page('download/' + date + '/' + game + '.html')
+            self.game_results[game] = self.read_page('download/' + game_date + '/' + game + '.html')
 
     """
         Method reads a single page and converts the results into dictionary.

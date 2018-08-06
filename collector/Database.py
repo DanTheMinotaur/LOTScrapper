@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import errorcode, Error
-
+import time
 
 class Database:
     __db_conn = mysql.connector
@@ -37,3 +37,18 @@ class Database:
         finally:
             cursor.close()
             return result
+
+    def alter_data(self, query, data):
+        start_time = time.time()
+        cursor = self.__db_conn.cursor()
+        try:
+            cursor.executemany(query, data)
+
+            self.__db_conn.commit()
+
+        except Error as err:
+            print(err)
+            self.__db_conn.rollback()
+        finally:
+            cursor.close()
+            print("Query Execution Time: " + str(time.time() - start_time))
