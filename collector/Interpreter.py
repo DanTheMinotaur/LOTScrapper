@@ -36,6 +36,7 @@ class Interpreter:
                 for number in inputs:
                     game_results.append(number.get('value'))
 
+
                 game_data['game' + str(game_count)] = game_results
 
                 game_count += 1
@@ -62,9 +63,10 @@ class Interpreter:
                 for game_result, numbers in obj['game_results'].items():
                     print(game_result + ' - - ' + str(numbers))
                     data.append(game_result)
-                    data = data + numbers
-                    #break
-                print(data)
+                    print(data + numbers)
+                    db.insert_result(data + numbers)
+                    break
+                #print(data)
                 #db.insert_result(data)
                 break
 
@@ -111,7 +113,8 @@ class Database:
 
     def insert_result(self, result):
         print(result)
-        query = "INSERT INTO results(competition, game_date, game, number_1, number_2, number_3, number_4, number_5, number_6, bonus_number) " \
+        query = "INSERT INTO results(" \
+                "competition, game_date, game, number_1, number_2, number_3, number_4, number_5, number_6, bonus_number)" \
                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         cursor = self.__db_conn.cursor()

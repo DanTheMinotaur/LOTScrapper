@@ -28,6 +28,7 @@ class CollectAll:
         self.games.append(game)
 
     def download_pages(self):
+        print("Downloading Web Pages")
         for page_name, page in self.urls.items():
             self.download_page(page_name, page)
 
