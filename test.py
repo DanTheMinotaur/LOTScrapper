@@ -14,5 +14,7 @@ test_par = Parser()
 #test_par.read_page('download/2018.08.06/euromillions.html')
 #print(test_par.read_page('download/2018.08.06/lotto54321.html'))
 
+print(test_par.game_results)
 test_par.read_games('2018.08.06')
 
+print(test_par.game_results)

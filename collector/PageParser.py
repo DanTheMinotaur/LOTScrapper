@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-
+from datetime import datetime, date
 
 class Parser:
 
@@ -13,7 +13,7 @@ class Parser:
         self.game_results = dict()
 
     """
-        Method generaets all data by date and sets game_results with each results.
+        Method generates all data by date and sets game_results with each results.
     """
     def read_games(self, date):
         for game in self.games:
@@ -34,7 +34,14 @@ class Parser:
 
             data = dict()
 
-            data['date'] = section.find('h4').get_text()
+            game_date = section.find('h4').get_text()
+
+            if len(game_date) > 18:
+                game_date = datetime.strptime(game_date[4:], '%d %B %Y, %H:%M%p')
+            else:
+                game_date = datetime.strptime(game_date[4:], '%d %B %Y').date()
+
+            data['date'] = game_date
 
             winning_results = section.find_all('div', class_="winning-results")
 
@@ -46,7 +53,7 @@ class Parser:
                 game_results = []
 
                 for number in inputs:
-                    game_results.append(number.get('value'))
+                    game_results.append(int(number.get('value')))
 
                 winning_numbers.append(game_results)
 
