@@ -3,6 +3,25 @@ from bs4 import BeautifulSoup
 
 class Parser:
 
+    def __init__(self):
+        self.games = [
+            'daily-million',
+            'euromillions',
+            'lotto',
+            'lotto54321'
+        ]
+        self.game_results = dict()
+
+    """
+        Method generaets all data by date and sets game_results with each results.
+    """
+    def read_games(self, date):
+        for game in self.games:
+            self.game_results[game] = self.read_page('download/' + date + '/' + game + '.html')
+
+    """
+        Method reads a single page and converts the results into dictionary.
+    """
     @staticmethod
     def read_page(page):
         html = BeautifulSoup(open(page).read(), 'html.parser')
@@ -11,7 +30,7 @@ class Parser:
 
         games = []
 
-        for section in results_sections:  #Splits sections
+        for section in results_sections:
 
             data = dict()
 
