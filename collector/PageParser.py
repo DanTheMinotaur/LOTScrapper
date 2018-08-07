@@ -14,6 +14,34 @@ class Parser:
         self.game_results = dict()
         self.db = Database()
 
+    def add_lotto_54321(self, single_game=True):
+        data_to_insert = []
+        for game_counter, game in enumerate(self.game_results['lotto54321']):
+            for i, result in enumerate(game['results']):
+                game_data = []
+                if i == 0:
+                    game_data.append("Lotto 54321")
+                if i == 1:
+                    game_data.append("Lotto 54321 Plus 1")
+                if i == 2:
+                    game_data.append("Lotto 54321 Plus 2")
+
+                game_data.append(game['date'])
+
+                game_data = game_data + result
+                print(game_data)
+                data_to_insert.append(tuple(game_data))
+
+            if single_game is True:
+                break
+
+        print("Inserting Lotto54321 Results to DB")
+        self.db.alter_data(
+            "INSERT INTO lottery.lotto_54321 (game_type, game_date, number_1, number_2, number_3, number_4, number_5, number_6, bonus_number) "
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);", data_to_insert
+        )
+
+
     def add_daily_millions(self, single_game=True):
         data_to_insert = []
         for game_counter, game in enumerate(self.game_results['daily-million']):
