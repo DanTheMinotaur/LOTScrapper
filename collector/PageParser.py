@@ -4,7 +4,6 @@ from collector.Database import Database
 import datetime
 
 class Parser:
-
     def __init__(self):
         self.games = [
             'daily-million',
@@ -15,8 +14,11 @@ class Parser:
         self.game_results = dict()
         self.db = Database()
 
-    def get_current_db_entries(self, db_table):
-        return self.db.query_data("SELECT game_type, DATE(game_date) FROM " + db_table)
+    def get_current_db_entries(self, db_table, date=True):
+        if date:
+            return self.db.query_data("SELECT game_type, DATE(game_date) FROM " + db_table)
+        else:
+            return self.db.query_data("SELECT game_type, game_date FROM " + db_table)
 
     def add_lotto_54321(self, single_game=True):
         data_to_insert = []
@@ -52,7 +54,8 @@ class Parser:
 
     def add_daily_millions(self, single_game=True):
         data_to_insert = []
-        current_results = self.get_current_db_entries('daily_millions')
+        current_results = self.get_current_db_entries('daily_millions', False)
+        print(current_results)
         for game_counter, game in enumerate(self.game_results['daily-million']):
             for i, result in enumerate(game['results']):
                 game_data = []
