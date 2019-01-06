@@ -46,7 +46,7 @@ class CollectAll:
         self.file_writer(data, dir_name + page_name + '.html')
 
     def file_writer(self, data, file_name):
-        file = open(file_name, 'w')
+        file = open(file_name, 'w', encoding='utf-8')
 
         file.write(data)
 
