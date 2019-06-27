@@ -6,4 +6,8 @@ from collector.Analyser import Analyser
 
 test = Analyser()
 
-print(test.analyse_lotto())
+res = test.analyse_lotto()
+
+for r,v in res.items():
+    print(r)
+    print(v)

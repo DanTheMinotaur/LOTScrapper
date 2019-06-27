@@ -24,7 +24,7 @@ class Analyser():
             numbers.append(r[6])
             numbers.append(r[7])
             bonus_numbers.append(r[8])
-            print(r)
+            #print(r)
 
         analysis = {
             'Main Numbers': Counter(numbers),
